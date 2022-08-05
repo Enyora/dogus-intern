@@ -23,7 +23,7 @@ namespace Product.API
         {
             services.AddControllers();
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer("Server=localhost,56709;Database=EnyoraDB;UserId=sa;Password=Esra2861"));
+                options.UseSqlServer("Server=localhost,56709;Initial Catalog=DogusIntern;User Id=SA;Password=Esra2861"));
             services.AddScoped<IBaseRepo, BaseRepo>();
         }
 
