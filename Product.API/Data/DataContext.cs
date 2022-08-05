@@ -1,11 +1,14 @@
-using Dogus.Models;
+using Microsoft.EntityFrameworkCore;
+using Product.API.Data.Entities;
 
-namespace Client.Data
+namespace Product.API.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<Client> Client { get; set; }
-  
-
+        public DataContext(DbContextOptions<DataContext> opt) : base(opt)
+        {
         }
+
+        public DbSet<Client> Clients { get; set; }
+    }
 }

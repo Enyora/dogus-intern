@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Product.API.Data;
+using Product.API.Data.Repositories;
 
 namespace Product.API
 {
@@ -18,8 +21,10 @@ namespace Product.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer("Server=localhost,56709;Database=EnyoraDB;UserId=sa;Password=Esra2861"));
+            services.AddScoped<IBaseRepo, BaseRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
