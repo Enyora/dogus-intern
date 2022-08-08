@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Product.API.Data.Repositories;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Product.API.Controllers
 {
@@ -25,6 +26,13 @@ namespace Product.API.Controllers
             }
 
             return Ok(clients);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteClients(int id)
+        {
+            await _repository.DeleteClients(id);
+            return NoContent();
         }
     }
 }
