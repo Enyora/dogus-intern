@@ -1,3 +1,4 @@
+using Product.API.Controllers;
 using Product.API.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -39,9 +40,22 @@ namespace Product.API.Data.Repositories
             var clients = _context.Clients.ToList();
             return clients;
         }
-                public Task DeleteClient(int id)
+        public Task DeleteClient(int id)
         {
             throw new NotImplementedException();
         }
+
+        public async Task UpdateClient(Client client)
+        {
+            _context.Update(client);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddClient(Client client)
+        {
+            _context.Add(client);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Product.API.Data.Entities;
 using Product.API.Data.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,5 +35,20 @@ namespace Product.API.Controllers
             await _repository.DeleteClients(id);
             return NoContent();
         }
+        [HttpPut]
+        public async Task<ActionResult> UpdateClient([FromBody] Client client)
+        {
+            await _repository.UpdateClient(client);
+            return NoContent();
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult> AddClient([FromBody] Client client)
+        {
+            await _repository.AddClient(client);
+            return NoContent();
+        }
+
     }
 }
