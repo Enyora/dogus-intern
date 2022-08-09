@@ -14,5 +14,7 @@ namespace Product.API.Data.Repositories
          Task UpdateClient(Client element);
 
          Task AddClient(Client element);
+
+         Client GetById(int id);
     }
 }

@@ -50,5 +50,21 @@ namespace Product.API.Controllers
             return NoContent();
         }
 
+        [HttpGet("{id}")]
+
+        public ActionResult GetById(int id)
+        {
+            var client = _repository.GetById(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(client);
+            }
+        }
+
+
     }
 }

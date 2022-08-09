@@ -57,5 +57,11 @@ namespace Product.API.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public Client GetById(int id)
+        {
+            var client = _context.Clients.Find(id);
+            return client;
+        }
+
     }
 }
