@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Vehicle.API.Data;
+using Vehicle.API.Data.Repositories;
 
 namespace Vehicle.API
 {
@@ -20,6 +23,9 @@ namespace Vehicle.API
         {
 
             services.AddControllers();
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer("Server=localhost,1500;Initial Catalog=VehicleDB;User Id=SA;Password=Esra2861"));
+            services.AddScoped<IBaseRepo, BaseRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
