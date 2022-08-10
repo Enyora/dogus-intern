@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Product.API.Data;
-using Product.API.Data.Repositories;
+using Vehicle.API.Data;
+using Vehicle.API.Data.Repositories;
 
-namespace Product.API
+namespace Vehicle.API
 {
     public class Startup
     {
@@ -21,9 +21,10 @@ namespace Product.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer("Server=localhost,52950;Initial Catalog=DogusIntern;User Id=SA;Password=Esra2861"));
+                options.UseSqlServer("Server=localhost,1500;Initial Catalog=VehicleDB;User Id=SA;Password=Esra2861"));
             services.AddScoped<IBaseRepo, BaseRepo>();
         }
 
