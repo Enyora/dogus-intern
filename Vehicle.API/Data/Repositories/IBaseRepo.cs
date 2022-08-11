@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 namespace Vehicle.API.Data.Repositories{
      public interface IBaseRepo
     {
-        List<Car> GetCars();
+        Task<List<Car>> GetCarsAsync();
 
-        Task DeleteCar(int id);
+        Task<bool> DeleteCarAsync(int id);
 
-        Task AddCar(Car car);
+        Task<bool> AddCarAsync(Car car);
 
-        Task UpdateCar(Car car);
+        Task<bool> UpdateCarAsync(Car car);
 
-        Car GetCarById(int id);
-        
-
+        Task<Car> GetCarByIdAsync(int id);
     }
 
 }

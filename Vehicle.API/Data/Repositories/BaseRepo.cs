@@ -4,58 +4,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace Vehicle.API.Data.Repositories{
+namespace Vehicle.API.Data.Repositories
+{
     public class BaseRepo : IBaseRepo
     {
         private readonly DataContext _context;
-         public BaseRepo(DataContext context)
+
+        public BaseRepo(DataContext context)
         {
             _context = context;
         }
 
-        public async Task AddCar(Car car)
+        public async Task<bool> AddCarAsync(Car car)
         {
-            _context.Add(car);
-            await _context.SaveChangesAsync();
+            await _context.AddAsync(car);
+            return await _context.SaveChangesAsync() > 0;
         }
 
 
-        public async Task DeleteCar(int id)
+        public async Task<bool> DeleteCarAsync(int id)
         {
-           if(id != 0)
+            var car = await _context.Cars.FindAsync(id);
+            if (car is null)
             {
-            _context.Cars.Remove(new Car
-            {
-                Id = id,
-            });
-            await _context.SaveChangesAsync();
+                return false;
             }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+
+            _context.Cars.Remove(car);
+            return await _context.SaveChangesAsync() > 0;
         }
 
 
-        public Car GetCarById(int id)
+        public async Task<Car> GetCarByIdAsync(int id)
         {
-            var car = _context.Cars.Find(id);
-            return car;
+            return await _context.Cars.FindAsync(id);
         }
 
-        public List<Car> GetCars()
+        public async Task<List<Car>> GetCarsAsync()
         {
-            var cars = _context.Cars.ToList();
-            return cars;
+            return await _context.Cars.ToListAsync();
         }
 
-        public async Task UpdateCar(Car car)
+        public async Task<bool> UpdateCarAsync(Car car)
         {
-           _context.Update(car);
-           await _context.SaveChangesAsync();
+            _context.Update(car);
+            return await _context.SaveChangesAsync() > 0;
         }
-
     }
 
 }

@@ -15,48 +15,66 @@ namespace Vehicle.API.Controllers
         {
             _repository = repository;
         }
+
+        //404, 200
         [HttpGet]
-        public IActionResult GetCars()
+        public async Task<IActionResult> GetCars()
         {
-            var cars = _repository.GetCars();
-            if (!cars.Any()) 
+            var cars = await _repository.GetCarsAsync();
+            if (cars is null || !cars.Any())
             {
                 return NotFound();
             }
 
             return Ok(cars);
         }
-        
+
+        //200, 400
         [HttpPost]
-
-        public async Task<ActionResult> AddCar([FromBody] Car car)
+        public async Task<IActionResult> AddCar([FromBody] Car car)
         {
-            await _repository.AddCar(car);
-            return NoContent();
+            bool succedeed = await _repository.AddCarAsync(car);
+            if (!succedeed)
+            {
+                return BadRequest("istediğim tipte değil.");
+            }
+
+            return Ok();
         }
 
+        //204, 400
         [HttpPut]
-        public async Task<ActionResult> UpdateCar([FromBody] Car car)
+        public async Task<IActionResult> UpdateCar([FromBody] Car car)
         {
-            await _repository.UpdateCar(car);
+            bool succedeed =  await _repository.UpdateCarAsync(car);
+            if (!succedeed)
+            {
+                return BadRequest("güncelleme işlemi başarısız.");
+            }
+
             return NoContent();
         }
-        
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCar(int id)
+        public async Task<IActionResult> DeleteCar(int id)
         {
-            await _repository.DeleteCar(id);
+            bool succedeed = await _repository.DeleteCarAsync(id);
+            if (!succedeed)
+            {
+                return BadRequest("silme işlemi başarısız.");
+            }
+
             return NoContent();
         }
 
-              [HttpGet("{id}")]
-
-        public ActionResult GetCarById(int id)
+        //200, 404
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCarById(int id)
         {
-            var car = _repository.GetCarById(id);
+            var car = await _repository.GetCarByIdAsync(id);
             if (car == null)
             {
-                return NotFound();
+                return NotFound("aradıgın araç yok.");
             }
             else
             {
