@@ -52,6 +52,12 @@ namespace Vehicle.API.Data.Repositories
             _context.Update(car);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<List<Car>> GetConditionalAsync(string modelname, int price)
+        {
+            var cars = await _context.Cars.Where(p=>p.ModelName == modelname && p.Price >= price).ToListAsync();
+            return cars;
+        }
     }
 
 }

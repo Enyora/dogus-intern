@@ -81,6 +81,22 @@ namespace Vehicle.API.Controllers
                 return Ok(car);
             }
         }
+        [HttpGet("{modelname}/{price}")]
+
+        public async Task<IActionResult> GetConditional(string modelname, int price)
+        {
+            var cars =  await _repository.GetConditionalAsync(modelname,price);
+             if (cars is null || !cars.Any())
+            {
+                return NotFound("aradıgın kriterde yok.");
+            }
+            else
+            {
+                return Ok(cars);
+            }
+
+        }
+
     }
 
 }
