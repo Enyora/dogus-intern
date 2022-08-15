@@ -94,7 +94,20 @@ namespace Vehicle.API.Controllers
             {
                 return Ok(cars);
             }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> GetPrice()
+        {
+            var cars = await _repository.GetPriceAsync();
+            if (cars == null)
+            {
+                return NotFound("Bu fiyat aralığında araç bulunamadı");
+            }
+            else
+            {
+                return Ok(cars);
+            }
         }
 
     }

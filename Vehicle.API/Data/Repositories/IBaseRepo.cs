@@ -17,6 +17,8 @@ namespace Vehicle.API.Data.Repositories{
         Task<Car> GetCarByIdAsync(int id);
 
         Task<List<Car>> GetConditionalAsync(string modelname, int price );
+
+         Task<List<Car>> GetPriceAsync();
         
     }
 
