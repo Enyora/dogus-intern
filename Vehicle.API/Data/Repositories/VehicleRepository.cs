@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Vehicle.API.Data.Repositories
 {
-    public class BaseRepo : IBaseRepo
+    public class VehicleRepository : IVehicleRepository
     {
         private readonly DataContext _context;
 
-        public BaseRepo(DataContext context)
+        public VehicleRepository(DataContext context)
         {
             _context = context;
         }
