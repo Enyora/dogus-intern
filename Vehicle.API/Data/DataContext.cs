@@ -12,7 +12,7 @@ namespace Vehicle.API.Data
         {
             modelBuilder.Entity<Car>().ToTable("Car");
         }
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Car> Cars { get; set; }  
     }
     
 }
