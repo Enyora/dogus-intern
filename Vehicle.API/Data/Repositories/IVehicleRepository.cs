@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Vehicle.API.Data.Repositories{
-     public interface IBaseRepo
+     public interface IVehicleRepository
     {
         Task<List<Car>> GetCarsAsync();
 

@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Vehicle.API.Data.Entities;
 using Vehicle.API.Data.Repositories;
 
@@ -10,13 +10,13 @@ namespace Vehicle.API.Controllers
     [ApiController]
     public class VehiclesController : ControllerBase
     {
-        private readonly IBaseRepo _repository;
-        public VehiclesController(IBaseRepo repository)
+        private readonly IVehicleRepository _repository;
+        public VehiclesController(IVehicleRepository repository)
         {
             _repository = repository;
         }
 
-        //404, 200
+        
         [HttpGet]
         public async Task<IActionResult> GetCars()
         {
@@ -29,7 +29,7 @@ namespace Vehicle.API.Controllers
             return Ok(cars);
         }
 
-        //200, 400
+        
         [HttpPost]
         public async Task<IActionResult> AddCar([FromBody] Car car)
         {
@@ -42,7 +42,7 @@ namespace Vehicle.API.Controllers
             return Ok();
         }
 
-        //204, 400
+        
         [HttpPut]
         public async Task<IActionResult> UpdateCar([FromBody] Car car)
         {
@@ -67,7 +67,7 @@ namespace Vehicle.API.Controllers
             return NoContent();
         }
 
-        //200, 404
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCarById(int id)
         {
@@ -81,8 +81,8 @@ namespace Vehicle.API.Controllers
                 return Ok(car);
             }
         }
-        [HttpGet("{modelname}/{price}")]
 
+        [HttpGet("{modelname}/{price}")]
         public async Task<IActionResult> GetConditional(string modelname, int price)
         {
             var cars =  await _repository.GetConditionalAsync(modelname,price);
@@ -109,7 +109,5 @@ namespace Vehicle.API.Controllers
                 return Ok(cars);
             }
         }
-
     }
-
 }
