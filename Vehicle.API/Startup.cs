@@ -23,7 +23,7 @@ namespace Vehicle.API
         {
 
             services.AddControllers();
-            services.AddDbContext<DataContext>(options =>
+            services.AddDbContext<VehicleDbContext>(options =>
                 options.UseSqlServer("Server=localhost,1500;Initial Catalog=VehicleDB;User Id=SA;Password=Esra2861"));
             services.AddScoped<IVehicleRepository, VehicleRepository>();
         }

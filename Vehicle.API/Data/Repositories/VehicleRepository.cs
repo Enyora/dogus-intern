@@ -10,9 +10,9 @@ namespace Vehicle.API.Data.Repositories
 {
     public class VehicleRepository : IVehicleRepository
     {
-        private readonly DataContext _context;
+        private readonly VehicleDbContext _context;
 
-        public VehicleRepository(DataContext context)
+        public VehicleRepository(VehicleDbContext context)
         {
             _context = context;
         }

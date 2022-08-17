@@ -3,9 +3,9 @@ using Vehicle.API.Data.Entities;
 
 namespace Vehicle.API.Data
 {
-    public class DataContext : DbContext
+    public class VehicleDbContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> opt) : base(opt)
+        public VehicleDbContext(DbContextOptions<VehicleDbContext> opt) : base(opt)
         {
         }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
