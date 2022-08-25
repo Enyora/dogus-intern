@@ -1,0 +1,71 @@
+﻿@model List<Car>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ <html style="height:100%; width:100%">
+
+<script>
+    function getData() {
+        console.log("Tiklandi");
+
+</script>
+
+<body style="height:100%; width:100% ">
+
+
+    <div style=" width:100%; height: 20%;  margin-top:2%; margin-bottom:1%; display:flex;  justify-content: center;">
+
+        <div style="width:95%; height: 100%;  background-color:yellow;  
+border-style: ridge; border-width: 7px; border-color: coral;"> Fotograf Yeri </div>
+    </div>
+
+    <table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Id</td>
+                <td>@car.ModelName</td>
+                <td>@car.Price</td>
+                <td>
+                <form asp-action="DeleteCar" method="post">
+                    <input type="hidden" value="@car.Id" name="id" />
+                        <button class=" btn btn-primary" type="submit">Delete</button>
+                
+
+                </form>
+                        <a class="btn btn-warning" href="/vehicle/update/@car.Id">Update</a>
+                    </td>
+  
+            </tr>
+        }
+    </tbody>
+  </table>
+
+    <div class="inputs" style=" display:flex; justify-content: center">
+        <input style="width: 17%; margin-right:2%" type="number" id="id" class="crsr" disabled>
+        <input style="width: 17%;  margin-right:2%" type="text" id="modelName" class="crsr">
+        <input style="width:17%;   margin-right:2%" type="number" id="price" class="crsr">
+ 
+    </div>
+
+    <script>
+    console.log("Saas");
+    </script>
+
+</body>
+ </html>
+
+
+   
+

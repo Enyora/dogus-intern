@@ -19,7 +19,7 @@ namespace Vehicle.API.Data.Repositories{
         Task<List<Car>> GetConditionalAsync(string modelname, int price );
 
          Task<List<Car>> GetPriceAsync();
-        
+        Task UpdateCarAsync();
     }
 
 }
