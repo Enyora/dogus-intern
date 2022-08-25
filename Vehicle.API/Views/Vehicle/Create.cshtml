@@ -1,0 +1,20 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Select the car to be add... </h1>
+<div class="row g-3">
+    <form asp-action="Create" method="post">
+    <div class="col-sm-7">
+        <input asp-for="ModelName" class="form-control" >
+    </div>
+    <div class="col-sm">
+        <input asp-for="Price" class="form-control" type="number">
+    </div>
+    <button type="submit">Add</button>
+    </form>
+</div>
+
+

@@ -22,7 +22,7 @@ namespace Vehicle.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<VehicleDbContext>(options =>
                 options.UseSqlServer("Server=localhost,1500;Initial Catalog=VehicleDB;User Id=SA;Password=Esra2861"));
             services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -37,14 +37,16 @@ namespace Vehicle.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Vehicle}/{action=Index}/{id?}");
             });
         }
     }

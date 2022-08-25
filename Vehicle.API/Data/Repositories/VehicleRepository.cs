@@ -19,7 +19,7 @@ namespace Vehicle.API.Data.Repositories
 
         public async Task<bool> AddCarAsync(Car car)
         {
-            await _context.AddAsync(car);
+            await _context.Cars.AddAsync(car);
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -64,6 +64,11 @@ namespace Vehicle.API.Data.Repositories
         {
             var cars = await _context.Cars.Where(p=>p.Price>1000 && p.Price<2500).ToListAsync();
             return cars;
+        }
+
+        public Task UpdateCarAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Vehicle.API.Data.Entities
 {
     public class Car
