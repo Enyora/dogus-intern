@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VideoGamesWeb.Data;
+using VideoGamesWeb.Data.Repositories;
 
 namespace VideoGamesWeb
 {
@@ -23,7 +26,10 @@ namespace VideoGamesWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddDbContext<VideoGamesDbContext>(options =>
+                options.UseSqlServer("Server=localhost,52950;Initial Catalog=VideoGamesDb;User Id=SA;Password=Esra2861"));
+            services.AddScoped<IVideoGamesRepository, VideoGamesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +56,7 @@ namespace VideoGamesWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=VideoGamesController}/{action=Index}/{id?}");
             });
         }
     }

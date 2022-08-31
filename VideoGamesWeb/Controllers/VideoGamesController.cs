@@ -5,22 +5,28 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using VideoGamesWeb.Data.Repositories;
 using VideoGamesWeb.Models;
 
 namespace VideoGamesWeb.Controllers
 {
-    public class HomeController : Controller
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class VideoGamesController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IVideoGamesRepository _videoGamesRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public VideoGamesController(IVideoGamesRepository videoGamesRepository)
         {
-            _logger = logger;
+            _videoGamesRepository = videoGamesRepository;
         }
+        [HttpGet]
+        public async Task<IActionResult> Index()
 
-        public IActionResult Index()
         {
-            return View();
+            var vgames = await _videoGamesRepository.GetGamesAsync();
+
+            return View(vgames);
         }
 
         public IActionResult Privacy()
